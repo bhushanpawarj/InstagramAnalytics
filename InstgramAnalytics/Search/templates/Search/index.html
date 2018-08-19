@@ -1,0 +1,93 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+{% load filters %}
+<style>
+  
+
+    .active-cyan-2 input[type=text]:focus:not([readonly]) {
+        border-bottom: 1px solid #4dd0e1;
+        box-shadow: 0 1px 0 0 #4dd0e1;
+    }
+
+    .active-cyan .fa, .active-cyan-2 .fa {
+        color: #4dd0e1;
+    }
+    .verticaltext {
+        transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+        -webkit-transform: rotate(-15deg);
+    }
+
+</style>
+
+<!-- Search form -->
+<p>{{ tag_name  }}</p>
+<div class="container-fluid">
+    <form class="form-inline md-form form-sm active-cyan active-cyan-2" method="post"  id="tag_search" >
+        {% csrf_token %}
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" name="tag">
+       <input type="submit" class="btn btn-default btn-large waves-effect waves-light" value="Tag Search ">
+    </form>
+
+         {% for item  in jData %}
+         {% ifequal  forloop.counter|modulo 1 %}
+        <div class="row pb-2">
+           {% endifequal %} 
+            <div class="col-xl-3">
+     
+                    <!-- Card -->
+                    <div class="card">
+
+                      <!-- Card image -->
+                      <div class="view overlay">
+                          <div class="card-img-top jumbotron" style="background-color:#777ACF">
+                          <p style="color:aliceblue ; font-size:30px" class="text-center verticaltext" name="tag_name">#{{ item.name }}</p>
+                           </div>
+                        <a href="#!">
+                          <div class="mask rgba-white-slight"></div>
+                        </a>
+                      </div>
+
+                      <!-- Card content -->
+                      <div class="card-body">
+
+                        <!-- Title 
+                        <h4 class="card-title">There are total 770 photos + videos for this tag </h4>
+                        -->
+                        <!-- Text -->
+                        <p class="card-text">There are total <strong>{{ item.media_count }} </strong>photos + videos for this tag </p>
+                        <!-- Button -->
+                        <a  class="btn btn-primary" href="#" >Download Album of Top 50</a>
+
+                      </div>
+
+                    </div>
+                    <!-- Card -->
+            </div>
+         {% ifequal  forloop.counter|modulo 0 %}
+         </div>
+         {% endifequal %} 
+        {% endfor %}
+
+  </div>
+<script>
+    function test() {
+        $(".ajaxprogress").show();
+        $.ajax({
+
+            type: 'GET',
+            url: {% url Search.views.download %},
+            dataType : "json",
+            async : true,
+            success : function (json){
+            alert (json);
+            $(".ajaxprogress").hide();
+    
+           }
+
+        });
+    }
+</script>
+{% endblock %}
