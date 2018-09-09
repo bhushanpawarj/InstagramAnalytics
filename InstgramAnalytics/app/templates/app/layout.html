@@ -28,10 +28,10 @@
                     <a class="nav-link" href="{% url 'home' %}"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-tachometer"></i> DashBoard</a>
+                    <a class="nav-link" href="{% url 'SocialLogin' %}"><i class="fa fa-tachometer"></i> DashBoard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'search' %}"><i class="fa fa-search"></i> Search</a>
+                    <a class="nav-link" href="{% url 'Search' %}"><i class="fa fa-search"></i> Search</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-info"> </i> About </a>
@@ -66,10 +66,11 @@
 </div>
 
     <div class="conatiner-fluid body-content">
-{% block content %}{% endblock %}
+{% block content %}
+{% endblock %}
         <hr/>
         <footer>
-            <p>&copy; {{ year }} - Design and Developed by Bhushan Pawar</p>
+            <p align="center">&copy; {{ year }} - Design and Developed by Bhushan Pawar</p>
         </footer>
     </div>
 
@@ -77,8 +78,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="{% static 'app/scripts/bootstrap.min.js' %}"></script>
     <script src="{% static 'app/scripts/mdb.min.js' %}"></script>
-   
-
+    <script src="{% static 'app/scripts/Chart.bundle.min.js' %}"></script>
 
 {% block scripts %}
     

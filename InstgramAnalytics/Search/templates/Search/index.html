@@ -72,22 +72,5 @@
         {% endfor %}
 
   </div>
-<script>
-    function test() {
-        $(".ajaxprogress").show();
-        $.ajax({
 
-            type: 'GET',
-            url: {% url Search.views.download %},
-            dataType : "json",
-            async : true,
-            success : function (json){
-            alert (json);
-            $(".ajaxprogress").hide();
-    
-           }
-
-        });
-    }
-</script>
 {% endblock %}

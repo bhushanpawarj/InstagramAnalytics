@@ -1,0 +1,20 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<style>
+.btn-ins {
+    background-color: #2e5e86 !important;
+    color: #fff !important;
+}    
+</style>
+{% if user.is_authenticated %}
+
+{% include 'DashBoard/DashBoardPartial.html' %}
+
+{% else %}
+<p align="center" class="p-5">
+<button type="button" class="btn btn-ins" onclick="window.location=' {% url 'social:begin' 'instagram' %}'"><i class="fa fa-instagram pr-1"></i> Login TO Instagram</button>
+ </p>
+{% endif %}
+
+{% endblock %}

@@ -1,14 +1,17 @@
 """
 Definition of urls for InstagramAnalysis.
 """
-
 from datetime import datetime
+from app import views
 from django.conf.urls import url
+import Search.views
 import django.contrib.auth.views
 
 import app.forms
 import app.views
 import Search.views
+import SocialLogin.views
+import DashBoard.views
 
 # Uncomment the next lines to enable the admin:
 from django.conf.urls import include
@@ -44,7 +47,11 @@ urlpatterns = [
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^search/', include('Search.urls')),
-
+    #url(r'^search/', include('search.urls')),
+    url(r'^Search/', Search.views.index ,name='Search'),
+    url(r'^SocialLogin/', SocialLogin.views.index ,name='SocialLogin'),
+    #url(r'^DashBoard/', include('social_django.urls' ,namespace='SocialLogin') ,name='DashBoard'),
+    url(r'^DashBoard/', DashBoard.views.index ,name='DashBoard'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
    
 ]

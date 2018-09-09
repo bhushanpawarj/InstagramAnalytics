@@ -4,6 +4,8 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>InstgramAnalytics</Name>
     <RootNamespace>InstgramAnalytics</RootNamespace>
+    <WebBrowserPort>8000</WebBrowserPort>
+    <PythonDebugWebServerCommandType>code</PythonDebugWebServerCommandType>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,7 +17,7 @@
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
-    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <WebBrowserUrl>http://127.0.0.1</WebBrowserUrl>
     <LaunchProvider>Django launcher</LaunchProvider>
     <DjangoSettingsModule>InstgramAnalytics.settings</DjangoSettingsModule>
     <OutputPath>.</OutputPath>
@@ -36,6 +38,13 @@
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
+    <Compile Include="DashBoard\admin.py" />
+    <Compile Include="DashBoard\apps.py" />
+    <Compile Include="DashBoard\migrations\__init__.py" />
+    <Compile Include="DashBoard\models.py" />
+    <Compile Include="DashBoard\tests.py" />
+    <Compile Include="DashBoard\views.py" />
+    <Compile Include="DashBoard\__init__.py" />
     <Compile Include="manage.py" />
     <Compile Include="InstgramAnalytics\__init__.py" />
     <Compile Include="InstgramAnalytics\settings.py" />
@@ -51,6 +60,13 @@
     <Compile Include="Search\urls.py" />
     <Compile Include="Search\views.py" />
     <Compile Include="Search\__init__.py" />
+    <Compile Include="SocialLogin\admin.py" />
+    <Compile Include="SocialLogin\apps.py" />
+    <Compile Include="SocialLogin\migrations\__init__.py" />
+    <Compile Include="SocialLogin\models.py" />
+    <Compile Include="SocialLogin\tests.py" />
+    <Compile Include="SocialLogin\views.py" />
+    <Compile Include="SocialLogin\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
@@ -66,6 +82,10 @@
     <Folder Include="app\static\app\scripts\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
+    <Folder Include="DashBoard\" />
+    <Folder Include="DashBoard\migrations\" />
+    <Folder Include="DashBoard\templates\" />
+    <Folder Include="DashBoard\templates\DashBoard\" />
     <Folder Include="InstgramAnalytics\" />
     <Folder Include="Search\" />
     <Folder Include="Search\migrations\" />
@@ -73,6 +93,10 @@
     <Folder Include="Search\templates\Search\" />
     <Folder Include="Search\templatetags\" />
     <Folder Include="Search\templatetags\__pycache__\" />
+    <Folder Include="SocialLogin\" />
+    <Folder Include="SocialLogin\migrations\" />
+    <Folder Include="SocialLogin\templates\" />
+    <Folder Include="SocialLogin\templates\SocialLogin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\static\app\content\all.css" />
@@ -95,9 +119,13 @@
     <Content Include="app\static\app\img\svg\arrow_left.svg" />
     <Content Include="app\static\app\img\svg\arrow_right.svg" />
     <Content Include="app\static\app\img\vender-no-instagram-projetual.png" />
+    <Content Include="app\static\app\scripts\Chart.bundle.min.js" />
     <Content Include="app\static\app\scripts\jquery-3.3.1.min.js" />
     <Content Include="app\static\app\scripts\mdb.min.js" />
     <Content Include="app\static\app\scripts\popper.min.js" />
+    <Content Include="DashBoard\templates\DashBoard\DashBoardPartial.html" />
+    <Content Include="DashBoard\templates\DashBoard\index.html" />
+    <None Include="InstgramAnalytics - Web Deploy.pubxml" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
@@ -131,6 +159,7 @@
     <Content Include="Search\templates\Search\index.html" />
     <Content Include="Search\templatetags\__pycache__\filters.cpython-36.pyc" />
     <Content Include="Search\templatetags\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="SocialLogin\templates\SocialLogin\index.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.html">

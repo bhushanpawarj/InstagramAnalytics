@@ -32,8 +32,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #My Apps
     'app',
     'Search',
+    'SocialLogin',
+    'DashBoard',
+
+    #3rd Party App
+    'social_django',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -52,6 +59,10 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    #3rd party social login 
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'InstgramAnalytics.urls'
@@ -125,3 +136,26 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+#Authentication backend for social login
+
+AUTHENTICATION_BACKENDS = (
+     'social_core.backends.instagram.InstagramOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'DashBoard'
+
+SOCIAL_AUTH_INSTAGRAM_KEY = '8923420ee9ca494e8bf9152d6494bcf3'
+SOCIAL_AUTH_INSTAGRAM_SECRET = '12a5615d321249acbd36d52973f9dcc7'
+SOCIAL_AUTH_INSTAGRAM_AUTH_EXTRA_ARGUMENTS = {'scope': 'likes comments relationships follower_list'}
+
+#SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['key']
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT =587
+EMAIL_HOST_USER="xbhushanpawarx@gmail.com"
+EMAIL_HOST_PASSWORD ="jagannathpawar"
+EMAIL_USE_TLS =True

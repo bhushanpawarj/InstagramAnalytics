@@ -4,6 +4,7 @@
 
 <!--<h2>{{ title }}</h2>
 <h3>{{ message }}</h3>-->
+
 <div class="container">
 <section class="section">
 
@@ -17,8 +18,8 @@
 
         <!--Grid column-->
         <div class="col-md-8 col-xl-9">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
+            <form id="contact-form" name="contact-form" action="{% url 'contact' %}" method="POST" >
+                {% csrf_token%}
                 <!--Grid row-->
                 <div class="row">
 
@@ -100,6 +101,12 @@
 
 </section>
 <!--Section: Contact v.2-->
+{% if  send_mail_response %}
+
+<h2>Your mail has been sent ..Thank your for your valuable  feedback !!</h2>
+
+{% endif %}
 </div>
+
 
 {% endblock %}
