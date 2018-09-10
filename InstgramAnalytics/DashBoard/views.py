@@ -25,7 +25,8 @@ def index(request):
     #now creating Date and likes arrays
      Dates=[]
      Likes=[]
-     response = requests.get("https://api.instagram.com/v1/users/self/media/recent/?access_token="+access_token)
+     Tags=[]
+     response = requests.get("https://api.instagram.com/v1/users/self/media/recent/?access_token="+access_token +"&COUNT=7")
      if(response.ok):
                 jData = json.loads(response.content)
                 for data in jData['data']:
@@ -33,31 +34,19 @@ def index(request):
                    #Dates.append( timeStamp)
                    #Dates.append(time.strftime("%Y-%m-%d", timeStamp))
                    #temp=datetime.fromtimestamp(int(data['created_time'])).strftime('%c')
-                   timeStamp = time.gmtime(int(data['created_time']))
-                   temp=time.strftime("%Ytemp", timeStamp)
-                   temp1=temp.__repr__()
+                   #timeStamp = time.gmtime(int(data['created_time']))
+                   #temp=time.strftime("%Ytemp", timeStamp)
+                   #temp1=temp.__repr__()
                    #temp1=temp1.decode('unicode_escape').encode('ascii','ignore')
                    Dates.append(int(data['created_time']))
                    Likes.append(data['likes']['count'])
+                   Tags.append(len(data['tags']))
      else:
             # If response code is not ok (200), print the resulting http error code with description
             response.raise_for_status()
 
-
-     #Per tag likes 
-     response = requests.get("https://api.instagram.com/v1/users/self/media/recent/?access_token="+access_token)
-     if(response.ok):
-                jData = json.loads(response.content)
-                for data in jData['data']:
-                   timeStamp = time.gmtime(int(data['created_time']))
-                   temp=time.strftime("%Ytemp", timeStamp)
-                   temp1=temp.__repr__()
-                   #temp1=temp1.decode('unicode_escape').encode('ascii','ignore')
-                   Dates.append(int(data['created_time']))
-                   Likes.append(data['likes']['count'])
-     else:
-            # If response code is not ok (200), print the resulting http error code with description
-            response.raise_for_status()
+ 
+     
 
      return render(
         request,
@@ -69,7 +58,7 @@ def index(request):
             'followed_by':followed_by,
             'media_count':media_count,
             'Dates' : Dates,
-            'Likes':json.dumps(Likes),
-            'access_token':access_token,
+            'Likes':Likes,
+            'Tags':Tags,
         }
     ) 

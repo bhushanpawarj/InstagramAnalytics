@@ -17,7 +17,7 @@
                 <div class=" row">
                     <div class="col-xl-6 p-2"><h4>Follwers/Following Details </h4></div>
                     <div class="col-xl-6">
-                        <button type="button" class="btn btn-outline-primary text-color float-right" onclick="resetGrid();"><span>Download List </span></button>
+                        {#<button type="button" class="btn btn-outline-primary text-color float-right" onclick="resetGrid();"><span>Download List </span></button>#}
                     </div>
                 </div>
                 <hr id="seperator">
@@ -32,7 +32,7 @@
                 <div class=" row">
                     <div class="col-xl-6 p-2"><h4>Number of likes performance over time </h4></div>
                     <div class="col-xl-6">
-                        <button type="button" class="btn btn-outline-primary text-color float-right" onclick="resetGrid();"><span>Download Graph </span></button>
+                       <a id="download"> <button type="button" class="btn btn-outline-primary text-color float-right" onclick="download();"><span>Download Graph </span></button></a>
                     </div>
                 </div>
                 <hr id="seperator">
@@ -41,19 +41,37 @@
             </div>
         </div>
  </div>
+
+    <div class="row pt-2">
+        <!--This card is to show the Tags performance over time-->
+         <div class="col-xl-12">
+            <div class="card p-4">
+                <div class=" row">
+                    <div class="col-xl-6 p-2"><h4>Number of Tag performance per Post</h4></div>
+                    <div class="col-xl-6">
+                       <a id="downloadTags"> <button type="button" class="btn btn-outline-primary text-color float-right" onclick="downloadTagsChart();"><span>Download Graph </span></button></a>
+                    </div>
+                </div>
+                <hr id="seperator">
+                 <!--This is chart for follewers and followinf details-->
+                 <canvas id="myTagChart"></canvas>  
+            </div>
+        </div>
+ </div>
 </div>
 
- <script>
+<script>
      DatesDecoded = [];
  </script>
-{% for Date in Dates %} 
 <script type="text/javascript"> 
-   var d = "{{Date}}";
-    d=new Date()
-    DatesDecoded.push(d.toLocaleDateString())
+    {% for Date in Dates %} 
+
+var d = new Date({{Date}} *1000); // The 0 there is the key, which sets the date to the eoch
+d=d.toLocaleDateString();
+DatesDecoded.push(d)
+    {% endfor %}
+
 </script>
-{% endfor %}
-{{ access_token }}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 
@@ -79,14 +97,14 @@ var myChart = new Chart(ctx, {
     
 });
    
-    //this is for bar chart
+    //this is for likes chart
     var ctx = document.getElementById("myBarChart").getContext('2d');
     var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: DatesDecoded ,
         datasets: [{
-            label: 'Number of LIkes',
+            label: 'Number of Likes',
             data: {{ Likes }},
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -112,9 +130,92 @@ var myChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     beginAtZero:true
-                }
+                },
+                scaleLabel:{
+                 display:true,
+                labelString: 'Number of Likes'
+              }
+            }],
+           xAxes: [{
+                ticks: {
+                    beginAtZero:true
+                },
+                scaleLabel:{
+                 display:true,
+                labelString: 'Post Date'
+              }
             }]
         }
     }
 });
+
+      //this is for tag chart
+    var ctx = document.getElementById("myTagChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{ Tags }} ,
+        datasets: [{
+            label: 'Number of likes ',
+            data: {{ Likes }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                },
+               scaleLabel:{
+                 display:true,
+                labelString: 'Number of Likes'
+              }
+            }],
+         
+          xAxes: [{
+                ticks: {
+                    beginAtZero:true
+                },
+               scaleLabel:{
+                 display:true,
+                labelString: 'Number of Tags'
+              }
+            }]
+
+
+        }
+    }
+});
+function download(){
+    var download = document.getElementById("download");
+	var image = document.getElementById("myBarChart").toDataURL("image/png").replace("image/png", "image/octet-stream");
+    download.setAttribute("href", image);
+	download.setAttribute("download","Number of likes performance over time.png");
+    
+ }
+
+function downloadTagsChart(){
+    var download = document.getElementById("downloadTags");
+	var image = document.getElementById("myTagChart").toDataURL("image/png").replace("image/png", "image/octet-stream");
+    download.setAttribute("href", image);
+	download.setAttribute("download","Number of likes performance with respoect to tags.png");
+    
+ }
 </script>
