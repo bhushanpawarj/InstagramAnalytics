@@ -12,11 +12,10 @@ from . import views
 from django.conf.urls import include
 
 urlpatterns = [
-   
-    #url(r'^$', views.index, name='search'),
+    url(r'/<tag_name>/' ,views.ShowAlbum ,name='ShowAlbum'),
+
+    url(r'^$', views.index, name='search'),
     #url(r'<tag_name>', views.download, name='download'),
     #url(r'^.*$', views.download, name='download'),
     #url(r'^<tag_name>$', views.download, name='download'),
-
- 
 ]

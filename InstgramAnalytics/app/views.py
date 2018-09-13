@@ -7,7 +7,7 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
 from django.core.mail import send_mail
-
+from . import models 
 
 def home(request):
     """Renders the home page."""
@@ -30,8 +30,16 @@ def contact(request):
         form_email=request.POST.get('email')
         form_subject=request.POST.get('subject')
         form_message=request.POST.get('message')
-        form_message=form_message+"\n From - " + form_email + "\n Name Of Sender -" +form_sender 
-        send_mail_response=send_mail(form_subject ,form_message  , form_email ,["xbhushanpawarx@gmail.com"] ,fail_silently=True)
+        #form_message=form_message+"\n From - " + form_email + "\n Name Of Sender -" +form_sender 
+        #store these into database instead of sending  via mail 
+        user=models.User(Name=form_sender ,Email=form_email,Subject=form_subject,Message=form_message,Time=datetime.now())
+        try :
+            user.save()
+            Result=True
+        except:
+            Result=False
+
+        #send_mail_response=send_mail(form_subject ,form_message  , form_email ,["xbhushanpawarx@gmail.com"] ,fail_silently=True)
         return render(
             request,
             'app/contact.html',
@@ -39,7 +47,7 @@ def contact(request):
                 'title':'Contact',
                 'message':'Your contact page.',
                 'year':datetime.now().year,
-                'send_mail_response':send_mail_response,
+                'Result':Result,
             }
         )
     

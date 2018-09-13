@@ -82,3 +82,22 @@ def download(request,tag_name='followforfollow'):
             
         }
     )
+
+#Show Album
+def ShowAlbum(request,TagName):
+    """Renders the home page."""
+    
+ 
+
+    return render(
+        request,
+        'Search/Media.html',
+        {
+            'title':'Home Page',
+            'year':datetime.now().year,
+            'tag_name' : TagName,
+
+            
+        }
+    )
+

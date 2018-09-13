@@ -49,6 +49,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^search/', include('search.urls')),
     url(r'^Search/', Search.views.index ,name='Search'),
+    url(r'^Search/<TagName>/', Search.views.ShowAlbum ,name='SearchWithTag'),
     url(r'^SocialLogin/', SocialLogin.views.index ,name='SocialLogin'),
     #url(r'^DashBoard/', include('social_django.urls' ,namespace='SocialLogin') ,name='DashBoard'),
     url(r'^DashBoard/', DashBoard.views.index ,name='DashBoard'),

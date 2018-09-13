@@ -156,6 +156,7 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
+    <Content Include="Search\templates\Search\Media.html" />
     <Content Include="Search\templates\Search\index.html" />
     <Content Include="Search\templatetags\__pycache__\filters.cpython-36.pyc" />
     <Content Include="Search\templatetags\__pycache__\__init__.cpython-36.pyc" />

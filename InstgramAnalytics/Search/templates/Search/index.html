@@ -59,7 +59,7 @@
                         <!-- Text -->
                         <p class="card-text">There are total <strong>{{ item.media_count }} </strong>photos + videos for this tag </p>
                         <!-- Button -->
-                        <a  class="btn btn-primary" href="#" >Download Album of Top 50</a>
+                        <a target="_blank" class="btn btn-primary" href="{% url 'SearchWithTag' item.name  %}" >Download Album of Top 50</a>
 
                       </div>
 
